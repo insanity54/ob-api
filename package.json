@@ -1,0 +1,16 @@
+{
+  "name": "ob-api",
+  "version": "0.0.1",
+  "description": "Open Bazaar Rest API",
+  "main": "index.js",
+  "dependencies": {
+    "lodash": "~4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jordonias/ob-api.git"
+  },
+  "author": "Jordan Larson <jordan@jordonias.com",
+  "license": "MIT",
+  "homepage": "https://github.com/jordonias/ob-api"
+}
