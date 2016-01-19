@@ -3,16 +3,9 @@
  */
 
 var _ = require('lodash');
-var Client = require('node-rest-client').Client;
 var http = require('http');
 var makeUrl = require('./lib/makeUrl');
 var resources = require('./lib/resources');
-
-/**
- * Module variables
- */
-
-var client = new Client();
 
 /**
  * 
