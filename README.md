@@ -1,6 +1,6 @@
 # ob-api
 
-## Installaction
+## Installation
 
 `npm install ob-api`
 
