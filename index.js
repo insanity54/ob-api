@@ -14,6 +14,11 @@ var resources = require('./lib/resources');
 _.map(resources, function(resource) {
   if(typeof resource.method !== 'undefined') {
     exports[resource.name] = function(query, cb) {
+      if(typeof query === 'function') {
+        cb = query;
+        query = undefined;
+      }
+
       var url;
       if(resource.method === 'POST' || resource.method === 'PUT') {
         url = makeUrl(resource.path);
@@ -27,16 +32,17 @@ _.map(resources, function(resource) {
         method: resource.method,
         path: url
       }, function(res) {
+        var result = '';
         res.on('data', function(chunk) {
-          console.log(chunk.toString());
+          result += chunk;
         });
 
         res.on('error', function(err) {
-          console.log(err);
+          cb(err);
         });
 
         res.on('end', function() {
-          console.log('end'); 
+          cb(null, result);
         });
       });
 
@@ -49,6 +55,11 @@ _.map(resources, function(resource) {
   } else {
     exports[resource.name] = _.mapValues(resource.methods, function(x) {
       return function(query, cb) {
+        if(typeof query === 'function') {
+          cb = query;
+          query = undefined;
+        }
+
         var url;
         if(x.method === 'POST' || x.method === 'PUT') {
           url = makeUrl(x.path);
@@ -62,16 +73,17 @@ _.map(resources, function(resource) {
           method: x.method,
           path: url
         }, function(res) {
+          var result = '';
           res.on('data', function(chunk) {
-            console.log(chunk.toString());
+            result += chunk;
           });
 
           res.on('error', function(err) {
-            console.log(err);
+            cb(err);
           });
 
           res.on('end', function() {
-            console.log('end'); 
+            cb(null, result);
           });
         });
 
