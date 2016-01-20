@@ -13,12 +13,12 @@ var resources = require('./lib/resources');
 
 _.map(resources, function(resource) {
   if(typeof resource.method !== 'undefined') {
-    exports[resource.name] = function(params, query, cb) {
+    exports[resource.name] = function(query, cb) {
       var url;
       if(resource.method === 'POST' || resource.method === 'PUT') {
-        url = makeUrl(resource.path, params);
+        url = makeUrl(resource.path);
       } else {
-        url = makeUrl(resource.path, params, query);
+        url = makeUrl(resource.path, query);
       }
 
       var req = http.request({
@@ -48,12 +48,12 @@ _.map(resources, function(resource) {
     }
   } else {
     exports[resource.name] = _.mapValues(resource.methods, function(x) {
-      return function(params, query, cb) {
+      return function(query, cb) {
         var url;
         if(x.method === 'POST' || x.method === 'PUT') {
-          url = makeUrl(x.path, params);
+          url = makeUrl(x.path);
         } else {
-          url = makeUrl(x.path, params, query);
+          url = makeUrl(x.path, query);
         }
 
         var req = http.request({
