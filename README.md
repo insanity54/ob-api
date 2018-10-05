@@ -1,5 +1,7 @@
 # ob-api
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/insanity54/ob-api.svg)](https://greenkeeper.io/)
+
 ## Installation
 
 `npm install ob-api`
